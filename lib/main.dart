@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'screens/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,12 +14,13 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  @override
+  
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        StreamProvider<TheUser>(
-          create: (context) => AuthService().authStateChanges,
+        Provider(create: (context) => AuthService(FirebaseAuth.instance)),
+        StreamProvider<TheUser>( initialData: null,
+          create: (context) => context.read<AuthService>().authStateChanges,
           ),
       ],
           child: MaterialApp(

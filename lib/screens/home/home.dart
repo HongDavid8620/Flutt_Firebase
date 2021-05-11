@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../services/auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    AuthService _auth = AuthService();
     return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.blueAccent,
@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
           ElevatedButton(
           child: Text ('Sign Out'),
           onPressed: ()async{
-            await _auth.signOut();
+            context.read<AuthService>().signOut();
             },
           ),]
           ),

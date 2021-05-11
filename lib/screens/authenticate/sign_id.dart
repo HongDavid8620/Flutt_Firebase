@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/auth.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -8,8 +9,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
-  final AuthService _auth = AuthService();
 
   ProgressDialog progressDialog;  // var loading dialog
 
@@ -27,7 +26,7 @@ class _SignInState extends State<SignIn> {
           child: Text ('Sign In'),
           onPressed: () async {
             progressDialog.show();
-            dynamic result = await _auth.signInAnon();
+            dynamic result = await context.read<AuthService>().signInAnon();
             if (result == null)
             {
               print("couldn't sign in");

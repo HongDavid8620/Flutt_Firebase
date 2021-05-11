@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/user.dart';
 
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth;
+
+  AuthService(this._auth);
   // Create user obj based on FirebaseUser
   TheUser _userFromFirebaseUser(User user){
     return user != null ? TheUser(uid: user.uid) : null;
