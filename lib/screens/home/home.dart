@@ -11,8 +11,9 @@ class Home extends StatelessWidget {
             backgroundColor: Colors.blueAccent,
         title: Text('Sign Out'),
         actions: [
-          ElevatedButton(
-          child: Text ('Sign Out'),
+          ElevatedButton.icon(
+            icon: Icon(Icons.logout),
+          label: Text ('Sign Out'),
           onPressed: ()async{
             context.read<AuthService>().signOut();
             },
