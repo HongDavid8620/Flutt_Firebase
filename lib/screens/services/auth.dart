@@ -3,7 +3,6 @@ import '../../models/user.dart';
 
 class AuthService {
   final FirebaseAuth _auth;
-
   AuthService(this._auth);
   // Create user obj based on FirebaseUser
   TheUser _userFromFirebaseUser(User user){
@@ -39,7 +38,6 @@ class AuthService {
     try{
     await _auth.signOut();
   }catch(e){
-    
   }
   }
 }

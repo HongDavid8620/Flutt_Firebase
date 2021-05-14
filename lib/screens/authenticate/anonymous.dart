@@ -3,12 +3,14 @@ import '../services/auth.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 
-class SignIn extends StatefulWidget {
+class Anonymous extends StatefulWidget {
+  final Function toggleView;
+  Anonymous({this.toggleView});
   @override
-  _SignInState createState() => _SignInState();
+  _AnonymousState createState() => _AnonymousState();
 }
 
-class _SignInState extends State<SignIn> {
+class _AnonymousState extends State<Anonymous> {
 
   ProgressDialog progressDialog;  // var loading dialog
 
@@ -23,6 +25,15 @@ class _SignInState extends State<SignIn> {
         title: Text('Sign In'),
         actions: [
           ElevatedButton(
+          child: Text ('Register here'),
+          onPressed: () {
+            widget.toggleView();
+          },),
+        ],
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        child: ElevatedButton(
           child: Text ('Sign In'),
           onPressed: () async {
             progressDialog.show();
@@ -38,10 +49,6 @@ class _SignInState extends State<SignIn> {
             progressDialog.hide();
           },
         ),
-        ],
-      ),
-      body: Container(
-        alignment: Alignment.center,
       ),
     );
   }
