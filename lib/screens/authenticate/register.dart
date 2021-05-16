@@ -1,3 +1,4 @@
+import 'package:flutt_firebase/provider/switch_sign_in.dart';
 import 'package:flutt_firebase/screens/authenticate/authenticate.dart';
 import 'package:flutt_firebase/screens/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
-  final Function toggleView;
-  Register({ this.toggleView });
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -65,7 +64,7 @@ class _RegisterState extends State<Register> {
           ),),
         ElevatedButton(
           onPressed: (){
-            widget.toggleView();
+            context.read<SwitchSignIn>().toggleView();
           }, 
           child: Text("Guest"),
           style: ElevatedButton.styleFrom(

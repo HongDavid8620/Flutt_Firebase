@@ -1,6 +1,8 @@
+import 'package:flutt_firebase/provider/switch_sign_in.dart';
 import 'package:flutt_firebase/screens/authenticate/register.dart';
 import 'package:flutter/material.dart';
 import 'anonymous.dart';
+import 'package:provider/provider.dart';
 
 class Authenticate extends StatefulWidget {
   @override
@@ -8,22 +10,19 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
-  bool SignInType = true;
-  void toggleView() {
-    setState(() {
-      SignInType = !SignInType;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    
+  final SignInType = context.watch<SwitchSignIn>().signInType;
     if (SignInType)
     {
-      return Anonymous(toggleView: toggleView);
+      return Anonymous();
     }
     else
     {
-      return Register(toggleView: toggleView);
+      return Register();
     }
   }
 }

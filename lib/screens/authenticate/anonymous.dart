@@ -1,11 +1,11 @@
+import 'package:flutt_firebase/provider/switch_sign_in.dart';
 import 'package:flutter/material.dart';
 import '../services/auth.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 
 class Anonymous extends StatefulWidget {
-  final Function toggleView;
-  Anonymous({this.toggleView});
+  
   @override
   _AnonymousState createState() => _AnonymousState();
 }
@@ -27,7 +27,7 @@ class _AnonymousState extends State<Anonymous> {
           ElevatedButton(
           child: Text ('Register here'),
           onPressed: () {
-            widget.toggleView();
+            context.read<SwitchSignIn>().toggleView();
           },),
         ],
       ),
