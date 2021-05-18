@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutt_firebase/screens/services/database.dart';
 import '../../models/user.dart';
 
 class AuthService {
@@ -15,8 +16,6 @@ class AuthService {
     //.map((User user) => _userFromFirebaseUser(user));  
     .map(_userFromFirebaseUser);  // shorter code
   }
-
-
   // Sign in anon
   Future signInAnon() async {
     try {
@@ -31,7 +30,31 @@ class AuthService {
 
   // Sign in with email && password
 
+  Future signInWithEmailAndPassword({String email, String password})async{
+    try{
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User user = result.user;
+      return _userFromFirebaseUser(user);
+    }on FirebaseAuthException catch(e){
+      print('error code: ${e.code}');
+      print('error : ${e.message}');
+    }
+  }
+
   // Register with email && password
+
+  Future createWithEmailAndPassword({String email ,String password}) async {
+    try{
+      UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      User user = result.user;
+      await DatabaseService(uid: user.uid).updateUserData('HongDavid', '21', 'M');
+      return _userFromFirebaseUser(user);
+    }on FirebaseAuthException catch(e){
+      print('error code : ${e.code}');
+      print(e.message);
+      return null;
+    }
+  }
 
   // Sign out
   Future signOut() async{

@@ -1,5 +1,5 @@
+import 'package:flutt_firebase/components/loading.dart';
 import 'package:flutt_firebase/provider/switch_sign_in.dart';
-import 'package:flutt_firebase/screens/authenticate/authenticate.dart';
 import 'package:flutt_firebase/screens/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,25 +11,37 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+
+  bool _loading = false;
+
+  final _formKey = GlobalKey<FormState>();
+  String _email = '';
+  String _password = '';
+  String _error = '';
+
   @override
   Widget build(BuildContext context) {
+
   final size = MediaQuery.of(context).size;
-    return Scaffold(
+    return _loading? Loading() : Scaffold(
       body: Theme(data: Theme.of(context).copyWith(
         primaryColor: Colors.purple
       ),
-              child: Column(
+              child: Form(
+                key: _formKey,
+                              child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [ 
             Text('Sign Up',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
             SvgPicture.asset(
-              "assets/icons/signup.svg"
-              ),
-            TextFieldContainer(child: TextField(
-              controller: emailController,
+                "assets/icons/signup.svg"
+                ),
+            TextFieldContainer(child: TextFormField(
+              onChanged: (val) {
+                setState(() => _email = val);
+              },
+              obscureText : true,
+              validator: (val) => val.isEmpty?'Invalid email':null,
           decoration: InputDecoration(
             hintText: "Your Email",
             prefixIcon: Icon(Icons.person),
@@ -37,9 +49,12 @@ class _RegisterState extends State<Register> {
           ),
         ),
         ),
-            TextFieldContainer(child: TextField(
-              controller: passwordController,
-              obscureText : true,
+            TextFieldContainer(child: TextFormField(
+              onChanged: (val) {
+                setState(() => _password = val);
+              },
+                obscureText : true,
+                validator: (val) => val.length < 6 ?'Invalid password. Please input more then 6 char':null,
           decoration: InputDecoration(
             hintText: "Password",
             prefixIcon: Icon(Icons.lock),
@@ -49,18 +64,26 @@ class _RegisterState extends State<Register> {
         ),
         ),
         ElevatedButton(
-          onPressed: (){
-            context.read<AuthService>().signInAnon();
+          onPressed: () async {
+            setState(() => _loading = true);
+            if(_formKey.currentState.validate()){
+              print(_email+_password);
+                 dynamic result = await context.read<AuthService>().signInWithEmailAndPassword(email: _email , password: _password);
+                    if (result == null){
+                      _error = "Please supply a valid email";
+                    }
+            }
+            setState(() => _loading = false);
           }, 
           child: Text("Sign Up"),
           style: ElevatedButton.styleFrom(
              onPrimary: Colors.white70,
-                primary: Colors.purple,
-                minimumSize: Size(size.width*0.95, 40),
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
+                  primary: Colors.purple,
+                  minimumSize: Size(size.width*0.95, 40),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                  ),
           ),),
         ElevatedButton(
           onPressed: (){
@@ -69,15 +92,16 @@ class _RegisterState extends State<Register> {
           child: Text("Guest"),
           style: ElevatedButton.styleFrom(
              onPrimary: Colors.black45,
-                primary: Colors.white54,
-                minimumSize: Size(size.width*0.95, 30),
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
+                  primary: Colors.white54,
+                  minimumSize: Size(size.width*0.95, 30),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                  ),
           ),),
           ],
         ),
+              ),
       ),
     );
   }
