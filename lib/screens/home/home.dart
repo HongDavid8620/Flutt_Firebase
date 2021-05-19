@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutt_firebase/models/users.dart';
 import 'package:flutt_firebase/screens/home/userList.dart';
 import 'package:flutt_firebase/screens/services/database.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        StreamProvider<QuerySnapshot>(create: (context) => DatabaseService().users, initialData: null,)
+        StreamProvider<List<Users>>(create: (context) => DatabaseService().users, initialData: null,)
       ],
           child: Scaffold(
             appBar: AppBar(
