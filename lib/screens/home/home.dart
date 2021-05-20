@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutt_firebase/models/users.dart';
 import 'package:flutt_firebase/screens/home/userList.dart';
 import 'package:flutt_firebase/screens/services/database.dart';

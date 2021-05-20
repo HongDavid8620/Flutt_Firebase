@@ -23,13 +23,13 @@ class DatabaseService {
     return snapshot.docs.map((doc){
       return Users(
         name: doc['name'] ?? '',
-        age: doc['age'] ?? 'n/a',
+        age: doc['age'] ?? '',
         gender: doc['gender']  ?? 'n/a',
       );
-    });
+    }).toList();
   }
 
-
-  Stream <List<Users>> get users => userCollection.snapshots()
-  .map(_userListFromSnapshot);
+  Stream <List<Users>> get users { 
+    return userCollection.snapshots().map(_userListFromSnapshot);
+  }
 }

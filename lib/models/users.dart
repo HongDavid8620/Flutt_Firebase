@@ -1,6 +1,5 @@
 class Users {
-  String name,gender;
-  int age;
+  String name,gender,age;
 
   Users({this.name,this.age,this.gender});
 }
