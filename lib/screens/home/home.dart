@@ -1,3 +1,4 @@
+import 'package:flutt_firebase/models/user.dart';
 import 'package:flutt_firebase/models/users.dart';
 import 'package:flutt_firebase/screens/home/userList.dart';
 import 'package:flutt_firebase/screens/services/database.dart';
@@ -7,12 +8,16 @@ import '../services/auth.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Home extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<TheUser>();
     return MultiProvider(
       providers: [
-        StreamProvider<List<Users>>(create: (context) => DatabaseService().users, initialData: null,)
+        StreamProvider<List<Users>>(create: (context) => DatabaseService().users, initialData: null,),
+        StreamProvider<Users>(create: (context) => DatabaseService(uid: user.uid).currentUser, initialData: null,),
       ],
+      
           child: Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.blueAccent,

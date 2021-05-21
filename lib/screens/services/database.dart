@@ -29,6 +29,20 @@ class DatabaseService {
     }).toList();
   }
 
+  // User snapshot
+  Users _userFromSnapshot (DocumentSnapshot snapshot){
+    return Users(
+      name: snapshot['name'] ?? '',
+      age: snapshot['age'] ?? '',
+      gender: snapshot['gender'] ?? '',
+    );
+  }
+
+  Stream <Users> get currentUser{
+    return userCollection.doc(uid).snapshots()
+    .map(_userFromSnapshot);
+  }
+
   Stream <List<Users>> get users { 
     return userCollection.snapshots().map(_userListFromSnapshot);
   }
