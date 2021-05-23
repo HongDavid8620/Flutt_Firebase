@@ -14,8 +14,8 @@ class Home extends StatelessWidget {
     final user = context.watch<TheUser>();
     return MultiProvider(
       providers: [
-        StreamProvider<List<Users>>(create: (context) => DatabaseService().users, initialData: null,),
-        StreamProvider<Users>(create: (context) => DatabaseService(uid: user.uid).currentUser, initialData: null,),
+        StreamProvider<List<Users>>(create: (context) => DatabaseService().users, initialData: null,catchError: (_,__)=>null,),
+        StreamProvider<Users>(create: (context) => DatabaseService(uid: user.uid).currentUser, initialData: null,catchError: (_,__)=> null,),
       ],
       
           child: Scaffold(
