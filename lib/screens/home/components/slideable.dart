@@ -1,4 +1,5 @@
 import 'package:flutt_firebase/models/users.dart';
+import 'package:flutt_firebase/screens/home/detailpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -16,6 +17,9 @@ class slidableWidget extends StatelessWidget {
                         child: Container(
                           color: Colors.white,
                           child: ListTile(
+                            onTap: ((){
+                              Navigator.push(context,MaterialPageRoute(builder: (context)=> DetailPage() ));
+                            }),
                             leading: CircleAvatar(
                               backgroundColor: Colors.indigoAccent,
                               child: Text('U'),

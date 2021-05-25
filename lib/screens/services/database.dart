@@ -6,16 +6,11 @@ class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
   // colection reference
-  final CollectionReference userCollection = FirebaseFirestore.instance
-  .collection('leassons');
-  // .where('name', isEqualTo: 'HongDavid')
-  // .get()
-  // .then((value) => null);
+  final userCollection = FirebaseFirestore.instance;
 
 // update user data
-
   Future updateUserData(String name, String age, String gender) async {
-    return await userCollection.doc(uid).set({
+    return await userCollection.collection('leassons').doc(uid).set({
       'name': name,
       'age' : age,
       'gender' : gender,
@@ -23,16 +18,10 @@ class DatabaseService {
     );
   }
 
-  Future<void> updateUser() {
-    return userCollection
-      .doc('ABC123')
-      .update({'company': 'Stokes and Sons'})
-      .then((value) => print("User Updated"))
-      .catchError((error) => print("Failed to update user: $error"));
-  }
-  Future<void> deleteUser() {
-    return userCollection
-      .doc('ABC123')
+  //delete document
+  Future<void> deleteUser(doc) {
+    return userCollection.collection('leassons')
+      .doc(doc.id)
       .delete()
       .then((value) => print("User Deleted"))
       .catchError((error) => print("Failed to delete user: $error"));
@@ -46,14 +35,21 @@ class DatabaseService {
       return Users(
         name: doc.get('age') ?? "N/A",
         age: doc.get('age') ?? "N/A",
-        gender: doc.get('gender').toString() ?? "N/A",
-      );}catch(e){
+        gender: doc.get('gender'),
+      );
+      }catch(e){
         print('error ${e.message}');
         // print( doc.get('gender').toString());
         return Users();
       }
     }).toList();
   }
+
+  Stream <List<Users>> get users { 
+    return userCollection.collection('leassons').snapshots()
+    .map(_userListFromSnapshot);
+  }
+
   // User snapshot a row
   Users _userFromSnapshot (DocumentSnapshot snapshot){
     return Users(
@@ -63,31 +59,30 @@ class DatabaseService {
     );
   }
     Stream <Users> get currentUser{
-    return userCollection.doc(uid).snapshots()
+    return userCollection.collection('leassons').doc(uid).snapshots()
     .map(_userFromSnapshot);
   }
 
-  //   Stream <List<Users>> get currentUser{
-  //     List<Users> list;
-  //   userCollection.doc(uid).snapshots().listen((result) {
-  //     list
-  //    });
-    
-  //   return ;
-  // }
+Stream <List<Users>> get userstemp {
+  userCollection.collection('leassons')
+      .snapshots()
+      .listen((result) {
+    result.docs.forEach((result) {
+      print("gender: ${result['gender']}");
+      print(result.data());
+      // return Users(
+      //   name: result['name'],
+      //   age: result['age'],
+      //   gender: result['gender'],
+      // );
+    });
+  });
+}
 
-  Stream <List<Users>> get users { 
-    return userCollection.snapshots()
-    .map(_userListFromSnapshot);
-  }
-
-
-
-
-
+  // using where
   final test = FirebaseFirestore.instance
   .collection('leassons').where('name', isEqualTo: 'HongDavid');
-  
+
   List<Users> _testListFromSnapshot(QuerySnapshot snapshot)
   {
     return snapshot.docs.map((doc){
@@ -104,3 +99,34 @@ class DatabaseService {
     .map(_testListFromSnapshot);
   }
 }
+
+
+
+
+  // Stream <List<Users>> get getUserList {
+  //   try {
+  //     userCollection.get().then((querySnapshot){
+  //       querySnapshot.docs.forEach((element) {
+  //         return Users(
+  //           name: element['name'] ?? 'error',
+  //           age: element['age'] ?? 'error',
+  //           gender: element['gender'] ?? 'error',
+  //         );
+  //       });
+  //     }
+  //     );
+  //     return itemList;
+  //   }catch(e){
+  //     print('Elements error: $e');
+  //     return null;
+  //   }
+  // }
+
+  //   Stream <List<Users>> get currentUser{
+  //     List<Users> list;
+  //   userCollection.doc(uid).snapshots().listen((result) {
+  //     list
+  //    });
+    
+  //   return ;
+  // }

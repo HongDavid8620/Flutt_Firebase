@@ -1,20 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutt_firebase/components/loading.dart';
 import 'package:flutt_firebase/models/users.dart';
+import 'package:flutt_firebase/screens/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'components/slideable.dart';
 
-class UserList extends StatelessWidget {
+class UserList extends StatefulWidget {
+  @override
+  _UserListState createState() => _UserListState();
+}
+
+class _UserListState extends State<UserList> {
   @override
   Widget build(BuildContext context) {
+
     final users = context.watch<List<Users>>() ?? [];
-    final currentUser = context.watch<Users>() ?? Users(); 
-    
-    // for(Users doc in currentUser)
-    // {
-    //   print(doc.name);
-    //   print(doc.age);
-    // }
+
       if(users !=null){
         print(users.length);
         return ListView.builder(  
