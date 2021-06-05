@@ -8,7 +8,9 @@ class WidgetsController {
     return snapshot.docs.map((doc){
       try{
       return Widgets(
-
+        id: doc.id,
+        title: doc['title'],
+        subtitle: doc['subtitle']
       );
       }catch(e){
         print('error ${e.message}');

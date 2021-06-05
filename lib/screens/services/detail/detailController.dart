@@ -10,14 +10,18 @@ class DetailController {
 
   Future<Detail> currentDetail() async {
     var snapshot =  await detailCollection.doc(detailId).get();
-    return Detail(
-      constructor: snapshot['constructor'],
-      description: snapshot['description'],
-      other: snapshot['other'],
-      property: snapshot['property'],
-      sample: snapshot['sample'],
-    );
-      // print("currentdetail: ${detail.constructor}");
+    try{
+      return Detail(
+        constructor: snapshot['constructor'],
+        description: snapshot['description'],
+        other: snapshot['other'],
+        property: snapshot['property'],
+        sample: snapshot['sample'],
+      );
+    }catch(e){
+        print('error ${e.message}');
+        return Detail();
+      }
     }
 
 }

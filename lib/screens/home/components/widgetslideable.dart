@@ -1,9 +1,10 @@
+import 'package:flutt_firebase/models/widgets.dart';
 import 'package:flutt_firebase/screens/home/detailpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class Widgetslidable extends StatelessWidget {
-    final obj;
+    final Widgets obj;
   const Widgetslidable({Key key, this.obj}) : super(key: key);
 
   @override
@@ -15,15 +16,15 @@ class Widgetslidable extends StatelessWidget {
                           color: Colors.white,
                           child: ListTile(
                             onTap: ((){
-                              Navigator.push(context,MaterialPageRoute(builder: (context)=> DetailPage(docid: obj.docid,title: obj.age,) ));
+                              Navigator.push(context,MaterialPageRoute(builder: (context)=> DetailPage(docid: obj.id,title: obj.title,) ));
                             }),
                             leading: CircleAvatar(
                               backgroundColor: Colors.indigoAccent,
                               child: Text('U'),
                               foregroundColor: Colors.white,
                             ),
-                            title: Text(obj.name),
-                            subtitle: Text('Age: ${obj.age}  Gender: ${obj.gender} DocId: ${obj.docid},'),
+                            title: Text(obj.title),
+                            subtitle: Text('Age: ${obj.subtitle},'),
                           ),
                         ),
                         

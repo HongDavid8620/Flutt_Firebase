@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'components/widgetslideable.dart';
 
-class UserList extends StatefulWidget {
+class WidgetList extends StatefulWidget {
   @override
-  _UserListState createState() => _UserListState();
+  _WidgetListState createState() => _WidgetListState();
 }
 
-class _UserListState extends State<UserList> {
+class _WidgetListState extends State<WidgetList> {
   @override
   Widget build(BuildContext context) {
 
@@ -22,6 +22,7 @@ class _UserListState extends State<UserList> {
                   physics: ClampingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context,index){
+                    print(widget[index].id);
                          return Widgetslidable(obj: widget[index],);
                   }
                        

@@ -23,7 +23,7 @@ class _DetailPageState extends State<DetailPage> {
           future: DetailController(detailId: docid).currentDetail(),
           builder:(context, detail)
           {
-            if (detail.hasData){
+            if (detail.hasData && detail.data.constructor != null){
               return Scaffold(
                 appBar: AppBar(title: Text(title),),
                 body: SingleChildScrollView(
@@ -52,18 +52,18 @@ class _DetailPageState extends State<DetailPage> {
                       child: DetailText(text: detail.data.constructor,)
                       ),
                       // Description
-                      Padding(child: Text('Description',style: TextStyle(fontSize: 20),),padding:EdgeInsets.only(left:30,top: 25,bottom: 10)),
+                      Padding(child: Text('Description',style: TextStyle(fontSize: 20),),padding:EdgeInsets.only(left:30,top: 25)),
                       Container(width: MediaQuery.of(context).size.width,margin: EdgeInsets.symmetric(horizontal: 20),
-                      padding: EdgeInsets.only(left:10,top:25), 
+                      padding: EdgeInsets.only(left:10,top:10), 
                       child:DetailText(text: detail.data.description)
                       ),
                       //Other
-                      Padding(child: Text('Other',style: TextStyle(fontSize: 20),),padding:EdgeInsets.only(left:30,top: 25,bottom: 10)),
+                      Padding(child: Text('Other',style: TextStyle(fontSize: 20),),padding:EdgeInsets.only(left:30,top: 25)),
                       Container(width: MediaQuery.of(context).size.width,margin: EdgeInsets.symmetric(horizontal: 20),
-                      padding: EdgeInsets.only(left:10,top:25), 
+                      padding: EdgeInsets.only(left:10,top:10), 
                       child:DetailText(text: detail.data.other)
                       ),
-                      
+                      SizedBox(height: 50,)
                     ],
                   ),
                 ),
@@ -87,7 +87,7 @@ class DetailText extends StatelessWidget {
   Widget build(BuildContext context) {
     return ReadMoreText(
       "$text",
-      style: TextStyle(height: 1.5,letterSpacing: 0.2,wordSpacing: 1),
+      style: TextStyle(height: 1.5,letterSpacing: 0.0,wordSpacing: 0.0),
       trimLines: 2,
       colorClickableText: Colors.pink,
       trimMode: TrimMode.Line,

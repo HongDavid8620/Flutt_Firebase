@@ -3,6 +3,7 @@ import 'package:flutt_firebase/models/userid.dart';
 import 'package:flutt_firebase/models/users.dart';
 import 'package:flutt_firebase/models/widgets.dart';
 import 'package:flutt_firebase/screens/home/userList.dart';
+import 'package:flutt_firebase/screens/home/widgetList.dart';
 import 'package:flutt_firebase/screens/services/database.dart';
 import 'package:flutt_firebase/screens/services/detail/detailController.dart';
 import 'package:flutt_firebase/screens/services/widgets/widgetscontroller.dart';
@@ -37,7 +38,7 @@ class Home extends StatelessWidget {
               },
             ),]
             ),
-            body: UserList(),
+            body: WidgetList(),
         ),
       );
   }

@@ -1,7 +1,8 @@
 class Widgets {
+  final String id;
   final String title;
   final String subtitle;
 
-  Widgets({this.title=null, this.subtitle=null});
+  Widgets({this.id,this.title=null, this.subtitle=null});
 
 }
