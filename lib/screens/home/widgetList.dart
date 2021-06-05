@@ -1,8 +1,8 @@
 import 'package:flutt_firebase/components/loading.dart';
-import 'package:flutt_firebase/models/users.dart';
+import 'package:flutt_firebase/models/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'components/slideable.dart';
+import 'components/widgetslideable.dart';
 
 class UserList extends StatefulWidget {
   @override
@@ -13,16 +13,16 @@ class _UserListState extends State<UserList> {
   @override
   Widget build(BuildContext context) {
 
-    final users = context.watch<List<Users>>() ?? [];
+    final widget = context.watch<List<Widgets>>() ?? [];
 
-      if(users !=null){
-        print(users.length);
+      if(widget !=null){
+        print(widget.length);
         return ListView.builder(  
-                  itemCount: users.length,
+                  itemCount: widget.length,
                   physics: ClampingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context,index){
-                         return slidableWidget(users: users[index],);
+                         return Widgetslidable(obj: widget[index],);
                   }
                        
                 );

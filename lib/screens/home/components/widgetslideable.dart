@@ -1,11 +1,10 @@
-import 'package:flutt_firebase/models/users.dart';
 import 'package:flutt_firebase/screens/home/detailpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class slidableWidget extends StatelessWidget {
-    final Users users;
-  const slidableWidget({Key key, this.users}) : super(key: key);
+class Widgetslidable extends StatelessWidget {
+    final obj;
+  const Widgetslidable({Key key, this.obj}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +15,15 @@ class slidableWidget extends StatelessWidget {
                           color: Colors.white,
                           child: ListTile(
                             onTap: ((){
-                              Navigator.push(context,MaterialPageRoute(builder: (context)=> DetailPage(docid: users.docid,title: users.age,) ));
+                              Navigator.push(context,MaterialPageRoute(builder: (context)=> DetailPage(docid: obj.docid,title: obj.age,) ));
                             }),
                             leading: CircleAvatar(
                               backgroundColor: Colors.indigoAccent,
                               child: Text('U'),
                               foregroundColor: Colors.white,
                             ),
-                            title: Text(users.name),
-                            subtitle: Text('Age: ${users.age}  Gender: ${users.gender} DocId: ${users.docid},'),
+                            title: Text(obj.name),
+                            subtitle: Text('Age: ${obj.age}  Gender: ${obj.gender} DocId: ${obj.docid},'),
                           ),
                         ),
                         

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutt_firebase/models/userid.dart';
 import 'package:flutt_firebase/models/users.dart';
 
 class DatabaseService {
@@ -7,6 +7,11 @@ class DatabaseService {
   DatabaseService({this.uid});
   // colection reference
   final userCollection = FirebaseFirestore.instance;
+
+// read data
+ Future<void> readData(String title) async{
+   var snapshot = userCollection.collection('widgets').where('title', isEqualTo: title);
+ }
 
 // update user data
   Future updateUserData(String name, String age, String gender) async {
@@ -33,6 +38,7 @@ class DatabaseService {
     return snapshot.docs.map((doc){
       try{
       return Users(
+        docid: doc.id,
         name: doc.get('age') ?? "N/A",
         age: doc.get('age') ?? "N/A",
         gender: doc.get('gender'),
@@ -51,17 +57,16 @@ class DatabaseService {
   }
 
   // User snapshot a row
-  Users _userFromSnapshot (DocumentSnapshot snapshot){
-    return Users(
-      name: snapshot['age'] ?? '',
-      age: snapshot['age'] ?? '',
-      gender: snapshot['age'] ?? '',
+  TheUser _userFromSnapshot (DocumentSnapshot snapshot){
+    return TheUser(
+      uid: snapshot.id,
     );
   }
-    Stream <Users> get currentUser{
+    Stream <TheUser> get currentUser{
     return userCollection.collection('leassons').doc(uid).snapshots()
     .map(_userFromSnapshot);
   }
+
 
 Stream <List<Users>> get userstemp {
   userCollection.collection('leassons')
