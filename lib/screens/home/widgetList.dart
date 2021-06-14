@@ -16,13 +16,12 @@ class _WidgetListState extends State<WidgetList> {
     final widget = context.watch<List<Widgets>>() ?? [];
 
       if(widget !=null){
-        print(widget.length);
+        print('list lenght: ${widget.length}');
         return ListView.builder(  
                   itemCount: widget.length,
                   physics: ClampingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context,index){
-                    print(widget[index].id);
                          return Widgetslidable(obj: widget[index],);
                   }
                        

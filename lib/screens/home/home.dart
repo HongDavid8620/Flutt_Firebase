@@ -5,7 +5,6 @@ import 'package:flutt_firebase/models/widgets.dart';
 import 'package:flutt_firebase/screens/home/userList.dart';
 import 'package:flutt_firebase/screens/home/widgetList.dart';
 import 'package:flutt_firebase/screens/services/database.dart';
-import 'package:flutt_firebase/screens/services/detail/detailController.dart';
 import 'package:flutt_firebase/screens/services/widgets/widgetscontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,9 +25,8 @@ class Home extends StatelessWidget {
       ],
       
           child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.blueAccent,
-          title: Text('Sign Out'),
+            backgroundColor: Color.fromRGBO(43, 54, 72, 1),
+            appBar: AppBar(title: Text('Widgets List',style: TextStyle(color: Color.fromRGBO(175, 189, 209, 1)),),backgroundColor: Color.fromRGBO(33, 41, 54, 1),
           actions: [
             ElevatedButton.icon(
               icon: Icon(Icons.logout),
