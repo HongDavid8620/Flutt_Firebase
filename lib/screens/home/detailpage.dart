@@ -33,13 +33,23 @@ class _DetailPageState extends State<DetailPage> {
                     children: [
                       // Sample
                       Header(text: 'Sample',),
-                      Container(height: (MediaQuery.of(context).size.width -40) *0.2878,
+                      Container(height: (MediaQuery.of(context).size.width -40) *0.4878,
                       width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.05),
-                      padding: EdgeInsets.all(25),
+                      padding: EdgeInsets.only(top:20,bottom: 20),
                       decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('assets/text.jpg'),fit: BoxFit.fitWidth),
-                        color: Colors.grey[300],
+                        color: Color.fromRGBO(33, 41, 54, 1)
+                      ),
+                      child:FutureBuilder(
+                        future: WidgetsController().getSampleImg(imageName: detail.data.sample),
+                        builder: (context, snapshot){
+                          if(snapshot.connectionState == ConnectionState.done){
+                          return Image(image: NetworkImage("${snapshot.data}"),fit: BoxFit.fitWidth,);
+                          }
+                          else{
+                            return CircularProgressIndicator();
+                          }
+                        },
                       ),
                       ),
                       //Constructor

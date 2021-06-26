@@ -1,5 +1,7 @@
 import 'package:flutt_firebase/models/widgets.dart';
 import 'package:flutt_firebase/screens/home/addwidget.dart';
+import 'package:flutt_firebase/screens/home/detailpage.dart';
+import 'package:flutt_firebase/screens/services/widgets/widgetscontroller.dart';
 import 'package:flutter/material.dart';
 
 class Widgetslidable extends StatelessWidget {
@@ -30,7 +32,8 @@ class Widgetslidable extends StatelessWidget {
                                       child: Text('${obj.description.substring(0 ,descriplength > 250 ? 250 : descriplength)} . . . ',
                                     style: TextStyle(fontSize: 14,color: Color.fromRGBO(175, 189, 209, 0.7)),),),
                                     ElevatedButton(onPressed: (){
-                                        Navigator.push(context,MaterialPageRoute(builder: (context)=> AddWidget() ));
+                                        WidgetsController().getSampleImg(imageName: 'samwid_container');
+                                        Navigator.push(context,MaterialPageRoute(builder: (context)=> DetailPage(title: obj.title,docid: obj.id,) ));
                                     },                                         
                                         child: Text('Read More',
                                         style: TextStyle(fontSize: 13,color: Colors.white70)),
