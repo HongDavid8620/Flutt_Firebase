@@ -35,30 +35,30 @@ class _DetailPageState extends State<DetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Sample
-                      Header(text: 'Sample',),
-                      
+                    (false)? SizedBox():
+                      Header(text: 'Sample',),                      
                       Container(height: (MediaQuery.of(context).size.width -40) *0.4878,
                       width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.05),
-                      padding: EdgeInsets.only(top:20,bottom: 20),
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(33, 41, 54, 1)
                       ),
                       child:FutureBuilder(
                         future: WidgetsController().getSampleImg(imageName: detail.data.sample),
                         builder: (context, snapshot){
-                          if(snapshot.connectionState == ConnectionState.done){
+                          if(snapshot.connectionState == ConnectionState.done && snapshot.data != null){
                           return Image(image: NetworkImage("${snapshot.data}"),fit: BoxFit.fitWidth,);
                           }
                           else{
-                            return CircularProgressIndicator();
+                            return Center(child: CircularProgressIndicator());
                           }
                         },
                       ),
                       ),
+                      
                       //video
-                       Header(text: 'Flutter Video',),
-                       Padding(padding: EdgeInsets.only(left: 30,top: 10),
+                      Header(text: 'Flutter Video',),
+                      Padding(padding: EdgeInsets.only(left: 30,top: 10),
                          child: RichText(text: TextSpan(
                                       text: '${detail.data.link}',
                                       style: TextStyle(color: Colors.blue),

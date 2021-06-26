@@ -37,37 +37,41 @@ class WidgetsController {
     var snapshot =  await widgetcollection.doc(detailId).get();
     try{
       print("detailID: $detailId");
-      return Detail(
+      return Future.delayed(Duration(milliseconds: 500))
+        .then((onValue) => Detail(
         link: snapshot['link'],
         constructor: snapshot['constructor'],
         description: snapshot['description'],
         other: snapshot['other'],
         sample: snapshot['sample'],
+        )
       );
     } catch(e){
-        print('error Detail ${e.message} with ID ${detailId}');
-        return Detail();
+        // print('error Detail ${e.message} with ID ${detailId}');
+         return Future.delayed(Duration(milliseconds: 100))
+        .then((onValue) => Detail());
+
       }
     }
 
     Future<dynamic> getSampleImg({String imageName}) async {
       String image;
       image = await firebase_storage.FirebaseStorage.instance
-      .ref('sample_img/samwid_container.png')
+      .ref('sample_img/$imageName.png')
       .getDownloadURL();
-      return image;
+      return Future.delayed(Duration(milliseconds: 100)).then((value) => image);
     }
-
   
-  Future<void> addWidget({String title, String sample, String infolink, String constructor, String other, String description}){
+  // Add widget
+  Future<void> addWidget({String title, String infolink, String constructor, String other, String description}){
     return widgetcollection.add({
       'title': title,
-      'sample': sample ?? '',
       'link': infolink,
       'category':['Text'],
       'constructor':constructor,
       'other': other,
-      'sample':'link',
+      'sample':'no info',
+      'img_dimension': 0,
       'description': description,
     });
   } 
