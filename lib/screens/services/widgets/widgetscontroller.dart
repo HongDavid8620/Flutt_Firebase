@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutt_firebase/models/detail.dart';
 import 'package:flutt_firebase/models/widgets.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 class WidgetsController {
   final String detailId;
   final String title='';
@@ -42,10 +44,18 @@ class WidgetsController {
         other: snapshot['other'],
         sample: snapshot['sample'],
       );
-    }catch(e){
-        print('error ${e.message}');
+    } catch(e){
+        print('error Detail ${e.message} with ID ${detailId}');
         return Detail();
       }
+    }
+
+    Future<dynamic> getSampleImg({String imageName}) async {
+      String image;
+      image = await firebase_storage.FirebaseStorage.instance
+      .ref('sample_img/samwid_container.png')
+      .getDownloadURL();
+      return image;
     }
 
   
