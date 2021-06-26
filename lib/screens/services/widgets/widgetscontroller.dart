@@ -36,7 +36,9 @@ class WidgetsController {
   Future<Detail> currentDetail() async {
     var snapshot =  await widgetcollection.doc(detailId).get();
     try{
+      print("detailID: $detailId");
       return Detail(
+        link: snapshot['link'],
         constructor: snapshot['constructor'],
         description: snapshot['description'],
         other: snapshot['other'],
@@ -57,11 +59,13 @@ class WidgetsController {
     }
 
   
-  Future<void> addWidget({String title, String constructor, String other, String description}){
+  Future<void> addWidget({String title, String sample, String infolink, String constructor, String other, String description}){
     return widgetcollection.add({
       'title': title,
+      'sample': sample ?? '',
+      'link': infolink,
       'category':['Text'],
-      'construtor':constructor,
+      'constructor':constructor,
       'other': other,
       'sample':'link',
       'description': description,

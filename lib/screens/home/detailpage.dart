@@ -1,9 +1,11 @@
 import 'package:flutt_firebase/components/loading.dart';
 import 'package:flutt_firebase/models/detail.dart';
 import 'package:flutt_firebase/screens/services/widgets/widgetscontroller.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:flutter/rendering.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
   final String docid,title;
@@ -16,6 +18,7 @@ class _DetailPageState extends State<DetailPage> {
   final String docid,title ;
   _DetailPageState({this.docid,this.title});
   dynamic detail;
+
 
   @SemanticsHintOverrides()
   Widget build(BuildContext context) {    
@@ -33,6 +36,7 @@ class _DetailPageState extends State<DetailPage> {
                     children: [
                       // Sample
                       Header(text: 'Sample',),
+                      
                       Container(height: (MediaQuery.of(context).size.width -40) *0.4878,
                       width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.05),
@@ -52,6 +56,29 @@ class _DetailPageState extends State<DetailPage> {
                         },
                       ),
                       ),
+                      //video
+                       Header(text: 'Flutter Video',),
+                       Padding(padding: EdgeInsets.only(left: 30,top: 10),
+                         child: RichText(text: TextSpan(
+                                      text: '${detail.data.link}',
+                                      style: TextStyle(color: Colors.blue),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () async{ var url = ('${detail.data.link}');
+                                      if(await canLaunch(url)){
+                                          await launch(url);
+                                      }else{
+                                        throw "Cannot load url";
+                                      }
+                                      },
+                                    ), 
+                         ),
+                       ),                 
+                      //  YoutubePlayer(
+                      //       controller: _controller,
+                      //       showVideoProgressIndicator: true,
+                      //       progressIndicatorColor: Colors.blueAccent,
+                      //   ),
+
                       //Constructor
                       Header(text: 'Constructor',),
                       TextBody(text: detail.data.constructor),
@@ -61,8 +88,10 @@ class _DetailPageState extends State<DetailPage> {
                       Header(text: 'Description',),
                       TextBody(text: detail.data.description),
                       //Other
-                      Header(text: 'Other',),
-                      TextBody(text: detail.data.other),
+                      
+                      (detail.data.other != '')?Header(text: 'Other',): SizedBox(height: 1,),
+                      TextBody(text: (detail.data.other)),
+                      
                       SizedBox(height: 50,)
                     ],
                   ),

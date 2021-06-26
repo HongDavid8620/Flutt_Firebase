@@ -14,6 +14,8 @@ class _AddWidgetState extends State<AddWidget> {
   
   final _formKey = GlobalKey<FormState>();
   String _title = '';
+  String _sample = '';
+  String _infolink = '';
   String _constructor = '';
   String _description = '';
   String _other = '';
@@ -33,15 +35,17 @@ class _AddWidgetState extends State<AddWidget> {
                 children: [
                   Padding(padding: EdgeInsets.only(top: 30),child: Text('Add Widget',style: TextStyle(fontSize: 30,color: Color.fromRGBO(175, 189, 209, 1)),)),
                   InputField(title: 'Title',labeltext: 'Enter widget name',lines: 1,onChanged: (val){setState(() => _title = val);}, validator: (val) => val.isEmpty ?'Invalid title':null,),
+                  InputField(title: 'Sample link',labeltext: 'Enter constructor',lines: 5,onChanged: (val){setState(() => _sample = val);}, validator:(val) => val.isEmpty ?'Pleases enter a link':null , ),
+                  InputField(title: 'Info link',labeltext: 'Enter constructor',lines: 5,onChanged: (val){setState(() => _infolink = val);}, validator:(val) => val.isEmpty ?'Pleases enter a link':null , ),
                   InputField(title: 'Construtor',labeltext: 'Enter constructor',lines: 5,onChanged: (val){setState(() => _constructor = val);}, validator:(val) => val.isEmpty ?'Pleases enter construtor':null , ),
                   InputField(title: 'Description',labeltext: 'Description for this widget',lines: 4,onChanged: (val){setState(() => _description = val);}, validator: (val) => val.isEmpty ?'Pleases enter description':null,),
-                  InputField(title: 'Other',labeltext: 'Enter Other',lines: 3,onChanged: (val){setState(() => _other = val);}, validator: (val) => val.isEmpty ?'Please enter other':null,),
+                  InputField(title: 'Other',labeltext: 'Enter Other',lines: 3,onChanged: (val){setState(() => _other = val);}),
                   Padding(padding: EdgeInsets.only(top: 20),
                    child: ElevatedButton(
                       onPressed: () async {
                         setState(() => _loading = true);
                         if(_formKey.currentState.validate()){
-                             dynamic result = WidgetsController().addWidget(title: _title,description: _description,constructor: _constructor,other: _other);
+                             dynamic result = WidgetsController().addWidget(title: _title, sample: _sample, infolink: _infolink, description: _description,constructor: _constructor,other: _other);
                              print('Widget Added');
                                 if (result == null){
                                   print("Please supply a valid more info");
