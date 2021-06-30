@@ -48,6 +48,7 @@ class _AddWidgetState extends State<AddWidget> {
                                 if (result == null){
                                   print("Please supply a valid more info");
                                 }
+                              Navigator.pop(context);
                         }
                         setState(() => _loading = false);
                         

@@ -6,9 +6,9 @@ import 'package:flutt_firebase/screens/services/widgets/widgetscontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Widgetslidable extends StatelessWidget {
+class WidgetCard extends StatelessWidget {
   final Widgets obj;
-  const Widgetslidable({Key key, this.obj}) : super(key: key);
+  const WidgetCard({Key key, this.obj}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
