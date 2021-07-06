@@ -29,7 +29,7 @@ class _DetailPageState extends State<DetailPage> {
             if (detail.hasData && detail.data.constructor != null){
               return Scaffold(
                 backgroundColor: Color.fromRGBO(43, 54, 72, 1),
-                appBar: AppBar(title: Text(title,style: TextStyle(color: Color.fromRGBO(175, 189, 209, 1)),),backgroundColor: Color.fromRGBO(33, 41, 54, 1),),
+                appBar: AppBar(title: Text(title,style: TextStyle(color: Color.fromRGBO(175, 189, 209, 1)),)),
                 body: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

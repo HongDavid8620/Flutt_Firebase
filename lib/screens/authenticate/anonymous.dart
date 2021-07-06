@@ -21,11 +21,10 @@ class _AnonymousState extends State<Anonymous> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
         title: Text('Sign In'),
         actions: [
-          ElevatedButton(
-          child: Text ('Register here'),
+          IconButton(
+            icon: Icon(Icons.app_registration),
           onPressed: () {
             context.read<SwitchSignIn>().toggleView();
           },),

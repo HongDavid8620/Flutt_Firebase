@@ -30,9 +30,8 @@ class _HomeState extends State<Home> {
             backgroundColor: Color.fromRGBO(43, 54, 72, 1),
             appBar: AppBar(title: Text('Widgets List',style: TextStyle(color: Color.fromRGBO(175, 189, 209, 1)),),backgroundColor: Color.fromRGBO(33, 41, 54, 1),
           actions: [
-            ElevatedButton.icon(
-              icon: Icon(Icons.logout),
-            label: Text ('Sign Out'),
+            IconButton(
+              icon: Icon(Icons.logout,color: Color.fromRGBO(175, 189, 209, 1),),
             onPressed: ()async{
               context.read<AuthService>().signOut();
               },

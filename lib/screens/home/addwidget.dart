@@ -3,6 +3,8 @@ import 'package:flutt_firebase/models/widgets.dart';
 import 'package:flutt_firebase/screens/services/widgets/widgetscontroller.dart';
 import 'package:flutter/material.dart';
 
+import 'components/inputfield.dart';
+
 class AddWidget extends StatefulWidget {
   const AddWidget({ Key key }) : super(key: key);
 
@@ -75,47 +77,4 @@ class _AddWidgetState extends State<AddWidget> {
   }
 }
 
-class InputField extends StatefulWidget {
-  final title,labeltext,lines;
-  final ValueChanged<String> onChanged;
-  final FormFieldValidator<String> validator;
-  const InputField({
-    Key key, this.title, this.labeltext, this.lines, this.onChanged, this.validator
-  }) : super(key: key);
-
-  @override
-  _InputFieldState createState() => _InputFieldState();
-}
-
-class _InputFieldState extends State<InputField> {
-  
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(padding: EdgeInsets.only(top: 30, left: 10,bottom: 15),
-                child: Text(widget.title,style: TextStyle(fontSize: 18,color: Color.fromRGBO(175, 189, 209, 1)),),
-               ),
-          TextFormField(
-                    style: TextStyle(color: Color.fromRGBO(175, 189, 209, 1),fontSize: 13),
-                    validator: widget.validator,
-                    onChanged: widget.onChanged,
-                    keyboardType: TextInputType.multiline,
-                    maxLength: null,
-                    maxLines: widget.lines,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Color.fromRGBO(33, 41, 54, 1),
-                      border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15.0),
-                      )),
-                      labelText: widget.labeltext,
-                      labelStyle: TextStyle(color: Color.fromRGBO(175, 189, 209, 1)),
-                    ),
-                  ),
-      ],
-    );
-  }
-}
+ 

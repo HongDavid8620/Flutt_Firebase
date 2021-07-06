@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   
   Widget build(BuildContext context) {
-    final Authenticate _authenticate = Authenticate() ; 
+    // final Authenticate _authenticate = Authenticate() ;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => SwitchSignIn()),
@@ -31,7 +31,13 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
+          scaffoldBackgroundColor: Color.fromRGBO(43, 54, 72, 1),     
+          primaryColor: Color.fromRGBO(33, 41, 54, 1),
           primarySwatch: Colors.blue,
+          // buttonTheme: ButtonThemeData(
+          //   buttonColor: Color(0xffff914d),
+          //   textTheme: ButtonTextTheme.primary,
+          // ),
         ),
         home: Wrapper(),
       ),
