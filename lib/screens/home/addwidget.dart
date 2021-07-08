@@ -36,7 +36,34 @@ class _AddWidgetState extends State<AddWidget> {
                 children: [
                   Padding(padding: EdgeInsets.only(top: 30),child: Text('Add Widget',style: TextStyle(fontSize: 30,color: Color.fromRGBO(175, 189, 209, 1)),)),
                   InputField(title: 'Title',labeltext: 'Enter widget name',lines: 1,onChanged: (val){setState(() => _title = val);}, validator: (val) => val.isEmpty ?'Invalid title':null,),
-                  InputField(title: 'Info link',labeltext: 'Enter constructor',lines: 5,onChanged: (val){setState(() => _infolink = val);}, validator:(val) => val.isEmpty ?'Pleases enter a link':null , ),
+                  InputField(title: 'Info link',labeltext: 'Enter Link',lines: 5,onChanged: (val){setState(() => _infolink = val);}, validator:(val) => val.isEmpty ?'Pleases enter a link':null , ),
+                  Container(
+                    child: 
+                      Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.black)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 10),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text('Category'),
+                                GestureDetector(
+                                  onTap: (){
+                                    print('Tapped Cat');
+                                  },
+                                  child: Container(
+                                    child: Icon(Icons.cancel,size: 10),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    
                   InputField(title: 'Construtor',labeltext: 'Enter constructor',lines: 5,onChanged: (val){setState(() => _constructor = val);}, validator:(val) => val.isEmpty ?'Pleases enter construtor':null , ),
                   InputField(title: 'Description',labeltext: 'Description for this widget',lines: 4,onChanged: (val){setState(() => _description = val);}, validator: (val) => val.isEmpty ?'Pleases enter description':null,),
                   InputField(title: 'Other',labeltext: 'Enter Other',lines: 3,onChanged: (val){setState(() => _other = val);}),
