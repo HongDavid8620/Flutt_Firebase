@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
             ),]
             ),
             body: StackWidgets(selectedindex: _selectedIndex,),
-
+            
             bottomNavigationBar: BottomNavigationBar(
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
@@ -59,8 +59,8 @@ class _HomeState extends State<Home> {
               type: BottomNavigationBarType.fixed,
               backgroundColor: Color.fromRGBO(33, 41, 54, 1),
               selectedFontSize: 15,
-              selectedIconTheme: IconThemeData(color: Color.fromRGBO(175, 189, 209, 1), size: 40),
-              selectedItemColor: Color.fromRGBO(175, 189, 209, 1),
+              // selectedIconTheme: IconThemeData(color: Color.fromRGBO(175, 189, 209, 1), size: 40),
+              // selectedItemColor: Color.fromRGBO(175, 189, 209, 1),
 
             ),
       

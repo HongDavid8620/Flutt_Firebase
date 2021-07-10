@@ -6,7 +6,7 @@ class InputField extends StatefulWidget {
   final FormFieldValidator<String> validator;
   final icon;
   const InputField({
-    Key key, this.title, this.labeltext, this.lines, this.onChanged, this.validator, this.icon
+    Key key, this.title, this.labeltext, this.lines, this.onChanged, this.validator, this.icon,
   }) : super(key: key);
 
   @override

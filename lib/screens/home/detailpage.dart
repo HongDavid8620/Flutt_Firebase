@@ -63,11 +63,14 @@ class _DetailPageState extends State<DetailPage> {
                                       text: '${detail.data.link}',
                                       style: TextStyle(color: Colors.blue),
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () async{ var url = ('${detail.data.link}');
+                                        ..onTap = () async { var url = ('${detail.data.link}');
+                                        print(detail.data.link);
                                       if(await canLaunch(url)){
                                           await launch(url);
                                       }else{
+                                        print('url :  ${detail.data.link}');
                                         throw "Cannot load url";
+                                        
                                       }
                                       },
                                     ), 

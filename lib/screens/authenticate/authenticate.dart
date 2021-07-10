@@ -10,17 +10,12 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
-
   @override
   Widget build(BuildContext context) {
-    
-  final SignInType = context.watch<SwitchSignIn>().signInType;
-    if (SignInType)
-    {
+    final signInType = context.watch<SwitchSignIn>().signInType;
+    if (signInType) {
       return Anonymous();
-    }
-    else
-    {
+    } else {
       return Register();
     }
   }
